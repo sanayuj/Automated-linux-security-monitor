@@ -1,0 +1,40 @@
+# ==========================================
+# Automated Linux Security Monitor - .gitignore
+# ==========================================
+
+# 1. Secret Keys and Credentials (NEVER COMMIT)
+*.pem
+*.key
+*.priv
+id_rsa*
+id_ed25519*
+!id_ed25519.pub
+*.vault
+.vault_pass*
+*.env
+secrets.yml
+
+# 2. Python Bytecode and Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# 3. Temporary, Backup, and Swap Files
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+/reports/*.html
+/reports/*.json
+/reports/*.txt
+
+# 4. OS and Editor Artifacts
+.DS_Store
+.idea/
+.vscode/
+*.log
