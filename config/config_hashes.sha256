@@ -1,0 +1,5 @@
+9d17740f58b88e785085fa5be9d2ebf4b336188fb0c86d2e3d6a788af6ad2b38  /etc/hosts
+4878cdd70b61948917cc068d0a62e6ca9ed9db8c5d15b5ce58645a02c4405dee  /etc/passwd
+5bac27ce5ff1a78ace8f3ef81bfd60cbd44810ac3f3d280da9d7649fe90c18f8  /etc/sudoers
+795c220764dba72bec0e70125e39f28891b26ff9e169d9073905220221b1c1d6  /etc/sudoers.d/automation
+38a2c0182e351197db95f8946d30d405b9c251d893c0155b8d70ee4ea96d0c73  /etc/ssh/sshd_config.d/99-security-hardening.conf

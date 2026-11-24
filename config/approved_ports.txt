@@ -1,0 +1,9 @@
+# Approved Port Baseline - Generated on Tue Nov 24 11:04:49 UTC 2026
+# Format: HOST:IP:PORT:SERVICE
+linux-server-01:172.31.32.76:22:ssh
+linux-server-01:172.31.32.76:5666:nrpe
+linux-server-02:172.31.35.140:22:ssh
+linux-server-02:172.31.35.140:5666:nrpe
+security-monitor:172.31.45.42:22:ssh
+security-monitor:172.31.45.42:80:http
+security-monitor:172.31.45.42:111:rpcbind
