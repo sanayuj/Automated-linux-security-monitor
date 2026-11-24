@@ -1,0 +1,15 @@
+[Unit]
+Description=Automated Daily Security Report Generation
+After=network.target
+
+[Service]
+Type=oneshot
+User=automation
+Group=automation
+WorkingDirectory=/home/automation/automated-linux-security-monitor
+ExecStart=/home/automation/automated-linux-security-monitor/scripts/daily_report.sh
+StandardOutput=append:/var/log/security-monitor/security_scheduler.log
+StandardError=append:/var/log/security-monitor/security_scheduler.log
+
+[Install]
+WantedBy=multi-user.target

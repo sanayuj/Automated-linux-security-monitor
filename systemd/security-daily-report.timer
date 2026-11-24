@@ -1,0 +1,10 @@
+[Unit]
+Description=Trigger Daily Security Report at 23:59 UTC
+Requires=security-daily-report.service
+
+[Timer]
+OnCalendar=*-*-* 23:59:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

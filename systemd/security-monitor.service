@@ -1,0 +1,15 @@
+[Unit]
+Description=Automated Linux Security Monitoring Cluster Audit
+After=network.target
+
+[Service]
+Type=oneshot
+User=automation
+Group=automation
+WorkingDirectory=/home/automation/automated-linux-security-monitor
+ExecStart=/home/automation/automated-linux-security-monitor/scripts/port_change_detector.sh
+StandardOutput=append:/var/log/security-monitor/security_scheduler.log
+StandardError=append:/var/log/security-monitor/security_scheduler.log
+
+[Install]
+WantedBy=multi-user.target

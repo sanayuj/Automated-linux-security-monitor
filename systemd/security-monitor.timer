@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Automated Security Audit Every 30 Minutes
+Requires=security-monitor.service
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=30min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
