@@ -1,0 +1,35 @@
+---
+- name: Install NRPE daemon and Nagios monitoring plugins
+  apt:
+    name:
+      - nagios-nrpe-server
+      - monitoring-plugins
+      - monitoring-plugins-basic
+      - monitoring-plugins-standard
+    state: present
+
+- name: Configure allowed hosts in nrpe.cfg
+  lineinfile:
+    path: /etc/nagios/nrpe.cfg
+    regexp: '^allowed_hosts='
+    line: "allowed_hosts={{ nrpe_allowed_hosts }}"
+    state: present
+  notify: Restart nrpe
+
+- name: Configure standard NRPE command definitions
+  blockinfile:
+    path: /etc/nagios/nrpe.cfg
+    marker: "# {mark} ANSIBLE MANAGED MONITORING COMMANDS"
+    block: |
+      command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
+      command[check_load]=/usr/lib/nagios/plugins/check_load -r -w 5.0,4.0,3.0 -c 10.0,8.0,6.0
+      command[check_disk]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /
+      command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
+      command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200
+  notify: Restart nrpe
+
+- name: Ensure nagios-nrpe-server is started and enabled
+  service:
+    name: nagios-nrpe-server
+    state: started
+    enabled: yes

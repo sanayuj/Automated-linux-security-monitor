@@ -1,0 +1,13 @@
+---
+# ==============================================================================
+# Playbook: System Security Hardening (SSH & Firewall)
+# Targets: All servers in the cluster
+# ==============================================================================
+- name: Enforce Security Hardening Policies
+  hosts: all_servers
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - ssh_hardening
+    - firewall

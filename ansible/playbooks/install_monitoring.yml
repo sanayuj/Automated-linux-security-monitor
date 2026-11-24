@@ -1,0 +1,12 @@
+---
+# ==============================================================================
+# Playbook: Install and Configure Monitoring Agents (NRPE)
+# Targets: Managed nodes only (linux-server-01, linux-server-02)
+# ==============================================================================
+- name: Deploy Nagios NRPE Monitoring Agents
+  hosts: managed_nodes
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - nagios_agent

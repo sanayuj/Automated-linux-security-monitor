@@ -1,0 +1,28 @@
+---
+- name: Deploy hardened SSH drop-in configuration
+  copy:
+    dest: /etc/ssh/sshd_config.d/99-security-hardening.conf
+    owner: root
+    group: root
+    mode: '0600'
+    validate: '/usr/sbin/sshd -t -f %s'
+    content: |
+      # Enforce Protocol 2
+      # Disable Root Login over network
+      PermitRootLogin {{ ssh_permit_root_login }}
+      
+      # Enforce Key-based authentication only
+      PasswordAuthentication {{ ssh_password_authentication }}
+      PubkeyAuthentication {{ ssh_pubkey_authentication }}
+      
+      # Brute-force throttling
+      MaxAuthTries {{ ssh_max_auth_tries }}
+      
+      # Session timeout (disconnect idle sessions after 10 minutes)
+      ClientAliveInterval {{ ssh_client_alive_interval }}
+      ClientAliveCountMax {{ ssh_client_alive_count_max }}
+      
+      # Disable empty passwords
+      PermitEmptyPasswords no
+      X11Forwarding no
+  notify: Restart sshd

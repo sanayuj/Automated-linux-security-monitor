@@ -1,0 +1,12 @@
+---
+# ==============================================================================
+# Playbook: Initial Server Baseline Setup
+# Targets: All servers in the cluster
+# ==============================================================================
+- name: Apply Baseline Configuration & Hardening to Fleet
+  hosts: all_servers
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - common

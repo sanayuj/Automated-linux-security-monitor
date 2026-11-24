@@ -1,0 +1,37 @@
+---
+- name: Set UFW default incoming policy
+  ufw:
+    direction: incoming
+    policy: "{{ firewall_default_incoming }}"
+
+- name: Set UFW default outgoing policy
+  ufw:
+    direction: outgoing
+    policy: "{{ firewall_default_outgoing }}"
+
+- name: Allow SSH (Port 22) through firewall
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+    comment: 'Admin SSH access'
+
+- name: Allow NRPE (Port 5666) specifically from security-monitor
+  ufw:
+    rule: allow
+    port: '5666'
+    proto: tcp
+    src: "{{ security_monitor_ip }}"
+    comment: 'Nagios NRPE monitoring'
+
+- name: Allow HTTP (Port 80) on security-monitor for Web Dashboard
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+    comment: 'Nagios Web UI'
+  when: inventory_hostname == 'security-monitor'
+
+- name: Enable UFW firewall service
+  ufw:
+    state: enabled

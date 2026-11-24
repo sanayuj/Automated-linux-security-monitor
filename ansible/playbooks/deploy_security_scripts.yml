@@ -1,0 +1,12 @@
+---
+# ==============================================================================
+# Playbook: Prepare Security Monitoring Environment & Log Rotation
+# Targets: All servers in the cluster
+# ==============================================================================
+- name: Deploy Security Monitoring Directories and Policies
+  hosts: all_servers
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - security_monitoring

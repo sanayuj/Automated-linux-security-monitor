@@ -1,0 +1,45 @@
+---
+# ==============================================================================
+# Tasks for 'common' role: Base packages and time synchronization
+# ==============================================================================
+
+- name: Update apt cache if older than 1 hour
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install foundational system and security utilities
+  apt:
+    name:
+      - curl
+      - wget
+      - htop
+      - net-tools
+      - ufw
+      - chrony
+      - unattended-upgrades
+      - logrotate
+      - gnupg
+      - software-properties-common
+    state: present
+
+- name: Set system timezone
+  timezone:
+    name: "{{ system_timezone }}"
+
+- name: Ensure Chrony NTP service is running and enabled
+  service:
+    name: chrony
+    state: started
+    enabled: yes
+
+- name: Apply kernel security parameters (sysctl)
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: yes
+  loop:
+    - { name: 'net.ipv4.ip_forward', value: '0' }
+    - { name: 'net.ipv4.icmp_echo_ignore_broadcasts', value: '1' }
+    - { name: 'net.ipv4.tcp_syncookies', value: '1' }

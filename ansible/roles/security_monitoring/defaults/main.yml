@@ -1,0 +1,5 @@
+---
+secmon_base_dir: "/opt/security-monitor"
+secmon_log_dir: "/var/log/security-monitor"
+secmon_user: "automation"
+secmon_group: "automation"

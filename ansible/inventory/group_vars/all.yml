@@ -1,0 +1,21 @@
+---
+# Global infrastructure variables
+admin_user: automation
+security_monitor_ip: "172.31.45.42"
+
+# NTP / Time synchronization
+ntp_server: "pool.ntp.org"
+system_timezone: "Etc/UTC"
+
+# Hardened SSH configurations
+ssh_port: 22
+ssh_permit_root_login: "no"
+ssh_password_authentication: "no"
+
+# Monitoring agent settings (NRPE)
+nrpe_port: 5666
+nrpe_allowed_hosts: "127.0.0.1,172.31.45.42"
+
+# Security directories on managed nodes
+security_scripts_dir: "/opt/security-monitor"
+security_logs_dir: "/var/log/security-monitor"
